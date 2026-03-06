@@ -1,58 +1,37 @@
-/*
- ==================================================
- MAIN CLASS - UseCase12PalindromeCheckerApp
- ==================================================
-*/
-
 public class PalindromeCheckerApp {
-
     public static void main(String[] args) {
-
-        String input = "level";   // Hardcoded input (no user input)
-
+        String input = "Level";
         PalindromeStrategy strategy = new StackStrategy();
 
-        boolean result = strategy.check(input);
+        long startTime = System.nanoTime();
+        boolean isPalindrome = strategy.check(input);
+        long endTime = System.nanoTime();
 
-        System.out.println("Input : " + input);
-        System.out.println("Is Palindrome? : " + result);
+        long duration = endTime - startTime;
+
+        System.out.println("Input: " + input);
+        System.out.println("Is Palindrome?: " + isPalindrome);
+        System.out.println("Execution Time: " + duration + " ns");
     }
 }
-
-/*
- ==================================================
- INTERFACE - PalindromeStrategy
- ==================================================
-*/
 
 interface PalindromeStrategy {
     boolean check(String input);
 }
 
-/*
- ==================================================
- CLASS - StackStrategy
- ==================================================
-*/
-
 class StackStrategy implements PalindromeStrategy {
-
+    @Override
     public boolean check(String input) {
-
+        String normalized = input.toLowerCase();
         java.util.Stack<Character> stack = new java.util.Stack<>();
-
-        // Push characters into stack
-        for (char c : input.toCharArray()) {
+        for (char c : normalized.toCharArray()) {
             stack.push(c);
         }
-
-        // Compare with popped characters
-        for (char c : input.toCharArray()) {
+        for (char c : normalized.toCharArray()) {
             if (c != stack.pop()) {
                 return false;
             }
         }
-
         return true;
     }
 }
