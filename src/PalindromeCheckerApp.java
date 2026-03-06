@@ -7,25 +7,22 @@ AUTHOR: Geetika k
  */
 
 
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Stack;
+import java.util.*;
 
 public class PalindromeCheckerApp {
     public static void main(String[] args){
-        String input = "ci2vic";
-        Queue<Character> queue  = new LinkedList<>();
-        Stack<Character> stack  = new Stack<>();
+        String input = "refer";
+        Deque<Character> queue  = new ArrayDeque<>();
 
-        for(char c: input.toCharArray()){
+        for (char c : input.toCharArray()) {
             queue.add(c);
-            stack.push(c);
         }
         boolean isPalindrome = true;
-        while (!queue.isEmpty()){
-            char fromQueue = queue.remove();
-            char fromStack = stack.pop();
-            if(fromQueue != fromStack){
+        while (queue.size() > 1) {
+            char first = queue.removeFirst();
+            char last = queue.removeLast();
+
+            if (first != last) {
                 isPalindrome = false;
                 break;
             }
